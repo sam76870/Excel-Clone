@@ -11,11 +11,22 @@ let fontFamily = document.querySelector(".font-family");
 let boldElem = document.querySelector(".bold");
 let italicElem = document.querySelector(".italic");
 let underlineElem = document.querySelector(".underline");
-let allAlignBtns = document.querySelectorAll("alignment_container>*");
+let allAlignBtns = document.querySelectorAll(".alignment_container>input");
 let formulaInput = document.querySelector(".formula_box");
+let gridContainer = document.querySelector(".grid_container");
+let topLeftBlock = document.querySelector(".top-left-block");
 let sheetDB = workSheetDB[0];
 
 firstSheet.addEventListener("click", handleActiveSheet);
+gridContainer.addEventListener("scroll", function () {
+    let top = gridContainer.scrollTop;
+    let left = gridContainer.scrollLeft;
+    console.log(left);
+    topLeftBlock.style.top = top + "px";
+    topRow.style.top = top + "px";
+    leftCol.style.left = left + "px";
+    topLeftBlock.style.left = left + "px";
+})
 //create Sheet and add functionalities
 addBtnContainer.addEventListener("click", function () {
     let sheetArr = document.querySelectorAll(".sheet");
@@ -115,7 +126,17 @@ for (let i = 0; i < allCells.length; i++) {
             centerBtn.classList.add("active-btn")
         }
     });
+
+    allCells[i].addEventListener("keydown", function (e) {
+            let obj = allCells[i].getBoundingClientRect();
+            let height = obj.height;
+            let address = addressBar.value;
+            let { rid} = getRIdCIdfromAddress(address);
+            let leftCol = document.querySelectorAll(".left-col .left-col_box")[rid];
+            leftCol.style.height = height + "px";
+        });
 }
+
 //intial cell click emulate
 allCells[0].click();
 //**********************formatting**************************** */
@@ -366,7 +387,7 @@ function changeChildrens(cellObject) {
     }
 }
 //remove yourself from parent's children array
-function removeFormula(cellObject,address) {
+function removeFormula(cellObject, address) {
     let formula = cellObject.formula;
     let formulaTokens = formula.split(" ");
     //split

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" class = "open_file">
+    <script>
+        let input = document.querySelector(".open_file");
+        input.addEventListener("change", function () {
+            let files = input.files;
+            let reqFileObj = files[0];
+            var fr = new FileReader();
+            fr.readAsText(reqFileObj);
+            fr.addEventListener("load", function () {
+                // data;
+                // excel
+                console.log(fr.result);
+            })
+// Json parse 
+// sheetdB-> current data
+// ui render 
+        })
+        // ui empty ->worksheetDB empty
+    </script>
+</body>
+</html>

@@ -94,6 +94,7 @@ body {
     width: 80%;
 }
 
+/* *************** sheet container ******************* */
 .sheets {
     background-color: lightgrey;
     height: 30px;
@@ -115,9 +116,9 @@ body {
 }
 
 .sheets_list {
-    width: calc(100vw - 30px);
+    /* width: calc(100vw - 30px); */
     overflow-x: auto;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
     display: flex;
     height: 100%;
 }
@@ -138,12 +139,16 @@ body {
     background-color: white;
 }
 
-/* grid css */
+/* ********************** grid container ********************** */
 
 .top-left-block {
     height: 30px;
     width: 25px;
     background-color: gray;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
 }
 
 .top-row {
@@ -152,7 +157,8 @@ body {
     display: flex;
     position: absolute;
     top: 0px;
-    left: 25px
+    left: 25px;
+    z-index: 90;
 }
 
 .row {
@@ -161,16 +167,18 @@ body {
 
 .col {
     min-width: 80px;
+    max-width: 80px;
     border: 1px solid;
     min-height: 30px;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
 }
 
 .left-col {
     width: 25px;
-    /* border: 1px solid red; */
+    position: absolute;
+    top: 30px;
+    left: 0;
+    z-index: 90;
+    border: 1px solid red;
 }
 
 .grid {
