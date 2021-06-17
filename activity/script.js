@@ -2,6 +2,7 @@ let addBtnContainer = document.querySelector(".add-sheet_container");
 let sheetList = document.querySelector(".sheets_list");
 let firstSheet = document.querySelector(".sheet");
 let allCells = document.querySelectorAll(".grid .col")
+// console.log(allCells);
 let addressBar = document.querySelector(".address_box")
 let leftBtn = document.querySelector(".left")
 let rightBtn = document.querySelector(".right")
@@ -83,6 +84,7 @@ for (let i = 0; i < allCells.length; i++) {
         let address = colAdd + rowAdd;
         addressBar.value = address;
         let cellObject = sheetDB[rid][cid];
+        // console.log(cellObject);
         // styling-> set 
         // object styling set 
         // UI 
@@ -128,13 +130,13 @@ for (let i = 0; i < allCells.length; i++) {
     });
 
     allCells[i].addEventListener("keydown", function (e) {
-            let obj = allCells[i].getBoundingClientRect();
-            let height = obj.height;
-            let address = addressBar.value;
-            let { rid} = getRIdCIdfromAddress(address);
-            let leftCol = document.querySelectorAll(".left-col .left-col_box")[rid];
-            leftCol.style.height = height + "px";
-        });
+        let obj = allCells[i].getBoundingClientRect();
+        let height = obj.height;
+        let address = addressBar.value;
+        let { rid } = getRIdCIdfromAddress(address);
+        let leftCol = document.querySelectorAll(".left-col .left-col_box")[rid];
+        leftCol.style.height = height + "px";
+    });
 }
 
 //intial cell click emulate
@@ -155,6 +157,7 @@ leftBtn.addEventListener("click", function () {
     let cellObject = sheetDB[rid][cid];
     cellObject.halign = "left";
 })
+
 rightBtn.addEventListener("click", function () {
     let address = addressBar.value;
     let { rid, cid } = getRIdCIdfromAddress(address);
@@ -169,6 +172,7 @@ rightBtn.addEventListener("click", function () {
     let cellObject = sheetDB[rid][cid];
     cellObject.halign = "right";
 })
+
 centerBtn.addEventListener("click", function () {
     let address = addressBar.value;
     let { rid, cid } = getRIdCIdfromAddress(address);
@@ -218,6 +222,7 @@ boldElem.addEventListener("click", function () {
         cellObject.bold = false;
     }
 })
+
 italicElem.addEventListener("click", function () {
     let isActive = italicElem.classList.contains("active-btn");
     let address = addressBar.value;
@@ -236,6 +241,7 @@ italicElem.addEventListener("click", function () {
         cellObject.italic = false;
     }
 })
+
 underlineElem.addEventListener("click", function () {
     let isActive = underlineElem.classList.contains("active-btn");
     let address = addressBar.value;
@@ -375,6 +381,7 @@ function setFormula(value, formula, rid, cid, address) {
 }
 function changeChildrens(cellObject) {
     let childrens = cellObject.children;
+    console.log(childrens)
     for (let i = 0; i < childrens.length; i++) {
         let chAddress = childrens[i];
         let chRiCiObj = getRIdCIdfromAddress(chAddress);
@@ -412,3 +419,19 @@ function getRIdCIdfromAddress(address) {
     let rid = Number(cellrowAdr) - 1;
     return { cid, rid };
 }
+
+function detectCycle(e) {
+    let cycle = true;
+    let address = addressBar.value;
+    let { rid, cid } = getRIdCIdfromAddress(address);
+    let cellObject = sheetDB[rid][cid];
+    // let parents = cellObject.children;
+    cellObject.forEach(cell => {
+        let 
+        if (cell.formula != "") {
+            alert("Already formula exist");
+        }
+        
+    });
+}
+detectCycle();

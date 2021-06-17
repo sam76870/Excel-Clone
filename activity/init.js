@@ -4,6 +4,7 @@ let str = "";
 for (let i = 0; i < 26; i++) {
     str += `<div class='col'>${String.fromCharCode(65 + i)}</div>`;
 }
+topRow.innerText = str;
 topRow.innerHTML = str;
 let leftCol = document.querySelector(".left-col");
 str = ""
