@@ -426,8 +426,7 @@ function detectCycle(e) {
     let { rid, cid } = getRIdCIdfromAddress(address);
     let cellObject = sheetDB[rid][cid];
     // let parents = cellObject.children;
-    cellObject.forEach(cell => {
-        let 
+    cellObject.forEach(function(cell) {
         if (cell.formula != "") {
             alert("Already formula exist");
         }
